@@ -20,8 +20,9 @@ namespace SocialNetwork.Models
 
         public int Age { get; set; }
 
-        //public List<Post> Posts { get; set; }
+        public List<string> Circles;
 
+        public List<string> Posts;
     }
 }
 
