@@ -5,17 +5,14 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-
 namespace SocialNetwork.Models
 {
-    public class Post
+    public class Circle
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Post_ { get; set; }
-        public DateTime Date { get; set; }
-        public string ContentType { get; set; }
-        public bool IsPublic { get; set; }
+
+        public string UserId { get; set; }
     }
 }

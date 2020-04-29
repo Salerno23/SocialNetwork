@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace SocialNetwork.Models
 {
-    public class Users
+    public class User
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -20,7 +20,8 @@ namespace SocialNetwork.Models
 
         public int Age { get; set; }
 
-        public List<Post> Posts { get; set; }
+        //public List<Post> Posts { get; set; }
 
     }
 }
+
