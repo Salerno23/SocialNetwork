@@ -1,29 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
 using SocialNetwork.Services;
-using System.Collections.Generic;
 
-namespace BooksApi.Controllers
+namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly SocialNetworkService _socialNetworkService;
+        private readonly UserService _userService;
 
-        public UserController(SocialNetworkService socialNetworkService)
+        public UserController(UserService userService)
         {
-            _socialNetworkService = socialNetworkService;
+            _userService = userService;
         }
 
         [HttpGet]
-        public ActionResult<List<Users>> Get() =>
-            _socialNetworkService.Get();
+        public ActionResult<List<User>> Get() =>
+            _userService.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetUser")]
-        public ActionResult<Users> Get(string id)
+        public ActionResult<User> Get(string id)
         {
-            var user = _socialNetworkService.Get(id);
+            var user = _userService.Get(id);
 
             if (user == null)
             {
@@ -34,24 +34,24 @@ namespace BooksApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Users> Create(Users user)
+        public ActionResult<User> Create(User user)
         {
-            _socialNetworkService.Create(user);
+            _userService.Create(user);
 
             return CreatedAtRoute("GetUser", new { id = user.Id.ToString() }, user);
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Users usersIn)
+        public IActionResult Update(string id, User usersIn)
         {
-            var user = _socialNetworkService.Get(id);
+            var user = _userService.Get(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            _socialNetworkService.Update(id, usersIn);
+            _userService.Update(id, usersIn);
 
             return NoContent();
         }
@@ -59,14 +59,14 @@ namespace BooksApi.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var user = _socialNetworkService.Get(id);
+            var user = _userService.Get(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            _socialNetworkService.Remove(user.Id);
+            _userService.Remove(user.Id);
 
             return NoContent();
         }
