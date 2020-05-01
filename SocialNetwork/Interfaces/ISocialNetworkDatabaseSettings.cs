@@ -12,6 +12,10 @@ namespace SocialNetwork.Interfaces
         public string CircleCollectionName { get; set; }
         public string CommentCollectionName { get; set; }
         public string PostCollectionName { get; set; }
+        public string FollowsCollectionName { get; set; }
+        public string WallCollectionName { get; set; }
+        public string FeedCollectionName { get; set; }
+
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }

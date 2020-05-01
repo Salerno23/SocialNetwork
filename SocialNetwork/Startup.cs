@@ -41,6 +41,9 @@ namespace SocialNetwork
             services.AddSingleton<CircleService>();
             services.AddSingleton<PostService>();
             services.AddSingleton<CommentService>();
+            services.AddSingleton<FollowsService>();
+            services.AddSingleton<FeedService>();
+            services.AddSingleton<WallService>();
 
             services.AddControllers();
         }
