@@ -37,9 +37,12 @@ namespace SocialNetwork
                 sp.GetRequiredService<IOptions<SocialNetworkDatabaseSettings>>().Value);
 
             services.AddSingleton<UserService>();
+            services.AddSingleton<BlockedService>();
+            services.AddSingleton<CircleService>();
+            services.AddSingleton<PostService>();
+            services.AddSingleton<CommentService>();
 
             services.AddControllers();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

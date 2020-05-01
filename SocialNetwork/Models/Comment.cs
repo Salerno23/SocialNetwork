@@ -12,6 +12,8 @@ namespace SocialNetwork.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
+        public string CommentId { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
     }

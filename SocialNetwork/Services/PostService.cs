@@ -18,7 +18,7 @@ namespace SocialNetwork.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _post = database.GetCollection<Post>(settings.SocialNetworkCollectionName);
+            _post = database.GetCollection<Post>(settings.PostCollectionName);
         }
 
         public List<Post> Get() =>

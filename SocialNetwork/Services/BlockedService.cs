@@ -18,7 +18,7 @@ namespace SocialNetwork.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _blocked = database.GetCollection<Blocked>(settings.SocialNetworkCollectionName);
+            _blocked = database.GetCollection<Blocked>(settings.BlockedCollectionName);
         }
 
         public List<Blocked> Get() =>

@@ -17,7 +17,7 @@ namespace SocialNetwork.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _comment = database.GetCollection<Comment>(settings.SocialNetworkCollectionName);
+            _comment = database.GetCollection<Comment>(settings.CommentCollectionName);
         }
 
         public List<Comment> Get() =>
