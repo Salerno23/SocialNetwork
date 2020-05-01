@@ -22,12 +22,12 @@ namespace SocialNetwork.Models
 
         public int Age { get; set; }
 
-        public List<string> Circles;
+        public List<string> Circles { get; set; }
 
-        public List<string> Posts;
+        public List<string> Posts { get; set; }
 
-        public string Blocked;
-        public string Follows;
+        public string Blocked { get; set; }
+        public string Follows { get; set; }
     }
 }
 

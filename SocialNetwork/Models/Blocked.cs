@@ -13,7 +13,7 @@ namespace SocialNetwork.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         
-        public string UserId;
-        public List<string> BlockedUserIds;
+        public string UserId { get; set; }
+        public List<string> BlockedUserIds { get; set; }
     }
 }
