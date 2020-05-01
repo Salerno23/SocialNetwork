@@ -5,10 +5,10 @@ using SocialNetwork.Services;
 
 namespace SocialNetwork.Controllers
 {
-    public class BlockedController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BlockedController : ControllerBase
     {
-        [Route("api/[controller]")]
-        [ApiController]
         private readonly BlockedService _blockedService;
 
         public BlockedController(BlockedService blockedService)
@@ -18,7 +18,7 @@ namespace SocialNetwork.Controllers
 
         [HttpGet]
         public ActionResult<List<Blocked>> Get() =>
-            _blokedService.Get();
+            _blockedService.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetBlockedList")]
         public ActionResult<Blocked> Get(string id)
@@ -34,9 +34,9 @@ namespace SocialNetwork.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> Create(Blocked blocked)
+        public ActionResult<Blocked> Create(Blocked blocked)
         {
-            _blokedService.Create(blocked);
+            _blockedService.Create(blocked);
 
             return CreatedAtRoute("GetBlockedList", new { id = blocked.Id.ToString() }, blocked);
         }
@@ -59,14 +59,14 @@ namespace SocialNetwork.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var blocked = _blokedService.Get(id);
+            var blocked = _blockedService.Get(id);
 
             if (blocked == null)
             {
                 return NotFound();
             }
 
-            _blokedService.Remove(blocked.Id);
+            _blockedService.Remove(blocked.Id);
 
             return NoContent();
         }

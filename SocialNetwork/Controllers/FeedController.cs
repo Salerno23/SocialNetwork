@@ -7,7 +7,7 @@ namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeedController
+    public class FeedController: ControllerBase
     {
         private readonly FeedService _feedService;
 

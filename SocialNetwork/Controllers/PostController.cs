@@ -9,49 +9,49 @@ namespace SocialNetwork.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly PostService _postService;
 
-        public PostController(UserService userService)
+        public PostController(PostService postService)
         {
-            _userService = userService;
+            _postService = postService;
         }
 
         [HttpGet]
-        public ActionResult<List<User>> Get() =>
-            _userService.Get();
+        public ActionResult<List<Post>> Get() =>
+            _postService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetUser")]
-        public ActionResult<User> Get(string id)
+        [HttpGet("{id:length(24)}", Name = "GetPost")]
+        public ActionResult<Post> Get(string id)
         {
-            var user = _userService.Get(id);
+            var post = _postService.Get(id);
 
-            if (user == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return post;
         }
 
         [HttpPost]
-        public ActionResult<User> Create(User user)
+        public ActionResult<Post> Create(Post post)
         {
-            _userService.Create(user);
+            _postService.Create(post);
 
-            return CreatedAtRoute("GetUser", new { id = user.Id.ToString() }, user);
+            return CreatedAtRoute("GetPost", new { id = post.Id.ToString() }, post);
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, User usersIn)
+        public IActionResult Update(string id, Post postIn)
         {
-            var user = _userService.Get(id);
+            var post = _postService.Get(id);
 
-            if (user == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            _userService.Update(id, usersIn);
+            _postService.Update(id, postIn);
 
             return NoContent();
         }
@@ -59,14 +59,14 @@ namespace SocialNetwork.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var user = _userService.Get(id);
+            var post = _postService.Get(id);
 
-            if (user == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            _userService.Remove(user.Id);
+            _postService.Remove(post.Id);
 
             return NoContent();
         }

@@ -7,7 +7,7 @@ namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WallController
+    public class WallController: ControllerBase
     {
         private readonly WallService _wallService;
 
@@ -44,14 +44,14 @@ namespace SocialNetwork.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, Wall wallIn)
         {
-            var user = _userService.Get(id);
+            var wall = _wallService.Get(id);
 
-            if (user == null)
+            if (wall == null)
             {
                 return NotFound();
             }
 
-            _userService.Update(id, usersIn);
+            _wallService.Update(id, wallIn);
 
             return NoContent();
         }
@@ -59,14 +59,14 @@ namespace SocialNetwork.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var user = _userService.Get(id);
+            var wall = _wallService.Get(id);
 
-            if (user == null)
+            if (wall == null)
             {
                 return NotFound();
             }
 
-            _userService.Remove(user.Id);
+            _wallService.Remove(wall.Id);
 
             return NoContent();
         }
