@@ -19,5 +19,7 @@ namespace SocialNetwork.Models
         public DateTime Date { get; set; }
         public string ContentType { get; set; }
         public bool IsPublic { get; set; }
+
+        public string CommentRef { get; set; }
     }
 }
