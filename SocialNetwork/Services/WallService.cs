@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
         public Wall Get(string id) =>
             _wall.Find<Wall>(wall => wall.Id == id).FirstOrDefault();
 
+        public Wall GetForUser(string userId) =>
+            _wall.Find<Wall>(wall => wall.UserId == userId).FirstOrDefault();
+
         public Wall Create(Wall wall)
         {
             _wall.InsertOne(wall);

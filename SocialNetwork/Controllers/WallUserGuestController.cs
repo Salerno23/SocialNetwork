@@ -7,31 +7,33 @@ namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeedUserController : ControllerBase
+    public class WallUserGuestController : ControllerBase
     {
-        private readonly FeedService _feedService;
+        private readonly WallService _wallService;
         private readonly PostService _postService;
 
-        public FeedUserController(FeedService feedService, PostService postService)
+        public WallUserGuestController(WallService wallService, PostService postService)
         {
-            _feedService = feedService;
+            _wallService = wallService;
             _postService = postService;
         }
 
         [HttpGet]
-        public ActionResult<List<Feed>> Get() =>
-            _feedService.Get();
+        public ActionResult<List<Wall>> Get() =>
+            _wallService.Get();
 
-        [HttpGet("{userId}")]
-        public ActionResult<List<Post>> Get(string userId)
+        [HttpGet("{userId}/{guestId}")]
+        public ActionResult<List<Post>> Get(string userId, string guestId)
         {
-            var feed = _feedService.GetForUser(userId);
+            //TODO
+            
+            var wall = _wallService.GetForUser(userId);
 
-            var feedPostIds = feed.Posts;
+            var wallPostIds = wall.Posts;
 
             List<Post> feedPosts = new List<Post>();
 
-            foreach (var feedPostId in feedPostIds)
+            foreach (var feedPostId in wallPostIds)
             {
                 feedPosts.Add(_postService.GetForPostId(feedPostId));
             }

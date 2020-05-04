@@ -27,6 +27,9 @@ namespace SocialNetwork.Services
         public Post Get(string id) =>
             _post.Find<Post>(post => post.Id == id).FirstOrDefault();
 
+        public Post GetForPostId(string postId) =>
+            _post.Find<Post>(post => post.PostId == postId).FirstOrDefault();
+
         public Post Create(Post post)
         {
             _post.InsertOne(post);
