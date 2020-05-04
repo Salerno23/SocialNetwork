@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
         public Feed Get(string id) =>
             _feed.Find<Feed>(feed => feed.Id == id).FirstOrDefault();
 
+        public List<Feed> GetForUser(string userId) =>
+            _feed.Find<Feed>(feed => feed.UserId == userId).ToList();
+
         public Feed Create(Feed feed)
         {
             _feed.InsertOne(feed);
