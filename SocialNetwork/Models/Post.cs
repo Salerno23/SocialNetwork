@@ -14,12 +14,13 @@ namespace SocialNetwork.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+
         public string PostId { get; set; }
         public string Post_ { get; set; }
         public DateTime Date { get; set; }
         public string ContentType { get; set; }
         public bool IsPublic { get; set; }
 
-        public string CommentRef { get; set; }
+        public List<string> CommentRef { get; set; }
     }
 }
