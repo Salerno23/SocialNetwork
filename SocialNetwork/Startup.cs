@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SocialNetwork.Data;
 using SocialNetwork.Interfaces;
 using SocialNetwork.Models;
 using SocialNetwork.Services;
@@ -44,6 +45,8 @@ namespace SocialNetwork
             services.AddSingleton<FollowsService>();
             services.AddSingleton<FeedService>();
             services.AddSingleton<WallService>();
+
+            services.AddTransient<DataSeeder>();
 
             services.AddControllers();
         }
