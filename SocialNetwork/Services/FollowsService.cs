@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
         public Follows Get(string id) =>
             _follows.Find<Follows>(follows => follows.Id == id).FirstOrDefault();
 
+        public Follows GetForUser(string userId) =>
+            _follows.Find<Follows>(follows => follows.UserId == userId).FirstOrDefault();
+
         public Follows Create(Follows follows)
         {
             _follows.InsertOne(follows);

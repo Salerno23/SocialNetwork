@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
         public User Get(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault();
 
+        public User GetForUser(string userId) =>
+            _user.Find<User>(user => user.UserId == userId).FirstOrDefault();
+
         public User Create(User user)
         {
             _user.InsertOne(user);

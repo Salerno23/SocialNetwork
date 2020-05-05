@@ -33,8 +33,6 @@ namespace SocialNetwork.Controllers
         [HttpGet("{userId}/{guestId}")]
         public ActionResult<List<Post>> Get(string userId, string guestId)
         {
-            //TODO
-
             var blockedList = _blockedService.GetForUser(userId);
             List<Post> wallPosts = new List<Post>();
 
@@ -77,12 +75,7 @@ namespace SocialNetwork.Controllers
                     }
                 }
             }
-
-            if (wallPosts == null)
-            {
-                return NotFound();
-            }
-
+            
             return wallPosts;
         }
     }
