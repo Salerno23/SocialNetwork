@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
         public Circle Get(string id) =>
             _circle.Find<Circle>(circle => circle.Id == id).FirstOrDefault();
 
+        public Circle GetForCircleId(string circleId) =>
+            _circle.Find<Circle>(circle => circle.CircleId == circleId).FirstOrDefault();
+
         public Circle Create(Circle circle)
         {
             _circle.InsertOne(circle);

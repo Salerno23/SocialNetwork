@@ -26,6 +26,9 @@ namespace SocialNetwork.Services
 
         public Blocked Get(string id) =>
             _blocked.Find<Blocked>(blocked => blocked.Id == id).FirstOrDefault();
+        
+        public Blocked GetForUser(string userId) =>
+            _blocked.Find<Blocked>(blocked => blocked.UserId == userId).FirstOrDefault();
 
         public Blocked Create(Blocked blocked)
         {

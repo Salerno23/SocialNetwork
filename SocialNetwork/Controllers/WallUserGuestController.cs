@@ -11,11 +11,19 @@ namespace SocialNetwork.Controllers
     {
         private readonly WallService _wallService;
         private readonly PostService _postService;
+        private readonly BlockedService _blockedService;
+        private readonly CircleService _circleService;
 
-        public WallUserGuestController(WallService wallService, PostService postService)
+        public WallUserGuestController(
+            WallService wallService, 
+            PostService postService, 
+            BlockedService blockedService,
+            CircleService circleService)
         {
             _wallService = wallService;
             _postService = postService;
+            _blockedService = blockedService;
+            _circleService = circleService;
         }
 
         [HttpGet]
@@ -26,24 +34,56 @@ namespace SocialNetwork.Controllers
         public ActionResult<List<Post>> Get(string userId, string guestId)
         {
             //TODO
+
+            var blockedList = _blockedService.GetForUser(userId);
+            List<Post> wallPosts = new List<Post>();
+
+            foreach (var blockedUserId in blockedList.BlockedUserIds)
+            {
+                if (blockedUserId == guestId)
+                {
+                    return wallPosts;
+                }
+            }
             
             var wall = _wallService.GetForUser(userId);
 
             var wallPostIds = wall.Posts;
 
-            List<Post> feedPosts = new List<Post>();
-
-            foreach (var feedPostId in wallPostIds)
+            foreach (var wallPostId in wallPostIds)
             {
-                feedPosts.Add(_postService.GetForPostId(feedPostId));
+                var post = _postService.GetForPostId(wallPostId);
+                var circles = post.CircleRef;
+
+                if (post.IsPublic)
+                {
+                    wallPosts.Add(post);
+                }
+                else
+                {
+                    foreach (var circle in circles)
+                    {
+                        var membersInCircle = _circleService.GetForCircleId(circle).MemberIds;
+                        foreach (var member in membersInCircle)
+                        {
+                            if (member == guestId)
+                            {
+                                if (!wallPosts.Contains(post))
+                                {
+                                    wallPosts.Add(post);
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            if (feedPosts == null)
+            if (wallPosts == null)
             {
                 return NotFound();
             }
 
-            return feedPosts;
+            return wallPosts;
         }
     }
 }
