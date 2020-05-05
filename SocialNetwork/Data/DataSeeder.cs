@@ -13,11 +13,9 @@ namespace SocialNetwork.Data
         private readonly IMongoCollection<Blocked> _blocked;
         private readonly IMongoCollection<Circle> _circle;
         private readonly IMongoCollection<Comment> _comment;
-        private readonly IMongoCollection<Feed> _feed;
         private readonly IMongoCollection<Follows> _follows;
         private readonly IMongoCollection<Post> _post;
         private readonly IMongoCollection<User> _user;
-        private readonly IMongoCollection<Wall> _wall;
 
         public DataSeeder(ISocialNetworkDatabaseSettings settings)
         {
@@ -27,16 +25,14 @@ namespace SocialNetwork.Data
             _blocked    = database.GetCollection<Blocked>(settings.BlockedCollectionName);
             _circle     = database.GetCollection<Circle>(settings.CircleCollectionName);
             _comment    = database.GetCollection<Comment>(settings.CommentCollectionName);
-            _feed       = database.GetCollection<Feed>(settings.FeedCollectionName);
             _follows    = database.GetCollection<Follows>(settings.FollowsCollectionName);
             _user       = database.GetCollection<User>(settings.UserCollectionName);
             _post       = database.GetCollection<Post>(settings.PostCollectionName);
-            _wall       = database.GetCollection<Wall>(settings.WallCollectionName);
         }
 
         public void SeedBlocked()
         {
-            Blocked blocked = new Blocked
+            Blocked blockeda = new Blocked
             {
                 UserId = "User1",
                 BlockedUserIds = new List<string>
@@ -45,7 +41,36 @@ namespace SocialNetwork.Data
                 }
             };
 
-            _blocked.InsertOne(blocked);
+            Blocked blockedb = new Blocked
+            {
+                UserId = "User2",
+                BlockedUserIds = new List<string>()
+            };
+
+            Blocked blockedc = new Blocked
+            {
+                UserId = "User3",
+                BlockedUserIds = new List<string>()
+            };
+
+            Blocked blockedd = new Blocked
+            {
+                UserId = "User4",
+                BlockedUserIds = new List<string>()
+            };
+
+            Blocked blockede = new Blocked
+            {
+                UserId = "User5",
+                BlockedUserIds = new List<string>()
+            };
+
+            List<Blocked> blocks = new List<Blocked>
+            {
+                blockeda, blockedb, blockedc, blockedd, blockede
+            };
+
+            _blocked.InsertMany(blocks);
         }
 
         public void SeedCircle()
@@ -70,10 +95,21 @@ namespace SocialNetwork.Data
                 }
             };
 
+            Circle circleC = new Circle
+            {
+                CircleId = "CircleC",
+                CircleOwner = "User3",
+                MemberIds = new List<string>
+                {
+                    "User5"
+                }
+            };
+
             List<Circle> circles = new List<Circle>
             {
                 circleA,
-                circleB
+                circleB,
+                circleC
             };
 
             _circle.InsertMany(circles);
@@ -115,43 +151,10 @@ namespace SocialNetwork.Data
 
             List<Comment> comments = new List<Comment>
             {
-                comment1,
-                comment2,
-                comment3,
-                comment4
+                comment1, comment2, comment3, comment4
             };
 
             _comment.InsertMany(comments);
-        }
-
-        public void SeedFeed()
-        {
-            Feed feed1 = new Feed
-            {
-                UserId = "User1",
-                Posts = new List<string>
-                {
-                    "PostId1",
-                    "PostId2"
-                }
-            };
-
-            Feed feed2 = new Feed
-            {
-                UserId = "User2",
-                Posts = new List<string>
-                {
-                    "PostId2"
-                }
-            };
-
-            List<Feed> feeds = new List<Feed>
-            {
-                feed1,
-                feed2
-            };
-
-            _feed.InsertMany(feeds);
         }
 
         public void SeedFollows()
@@ -174,10 +177,27 @@ namespace SocialNetwork.Data
                 }
             };
 
+            Follows follows3 = new Follows
+            {
+                UserId = "User3",
+                FollowedUserIds = new List<string>()
+            };
+
+            Follows follows4 = new Follows
+            {
+                UserId = "User4",
+                FollowedUserIds = new List<string>()
+            };
+
+            Follows follows5 = new Follows
+            {
+                UserId = "User5",
+                FollowedUserIds = new List<string>()
+            };
+
             List<Follows> followses = new List<Follows>
             {
-                follows1,
-                follows2
+                follows1, follows2, follows3, follows4, follows5
             };
 
             _follows.InsertMany(followses);
@@ -192,10 +212,11 @@ namespace SocialNetwork.Data
                 Date = new DateTime(2020, 5, 1),
                 ContentType = "text",
                 IsPublic = true,
-                CommentRef = new List<string>
+                Comments = new List<string>
                 {
                     "CommentId1", "CommendId2"
-                }
+                },
+                CircleRef = new List<string>()
             };
 
             Post post2 = new Post
@@ -205,7 +226,8 @@ namespace SocialNetwork.Data
                 Date = new DateTime(2020, 4, 30),
                 ContentType = "text",
                 IsPublic = false,
-                CommentRef = new List<string>()
+                Comments = new List<string>(),
+                CircleRef = new List<string>()
             };
 
             Post post3 = new Post
@@ -215,7 +237,8 @@ namespace SocialNetwork.Data
                 Date = new DateTime(2020, 5, 2),
                 ContentType = "text",
                 IsPublic = false,
-                CommentRef = new List<string>()
+                Comments = new List<string>(),
+                CircleRef = new List<string>()
             };
 
             Post post4 = new Post
@@ -225,12 +248,27 @@ namespace SocialNetwork.Data
                 Date = new DateTime(2020, 5, 3),
                 ContentType = "image",
                 IsPublic = true,
-                CommentRef = new List<string>()
+                Comments = new List<string>(),
+                CircleRef = new List<string>()
+            };
+
+            Post post5 = new Post
+            {
+                PostId = "PostId5",
+                Post_ = "This is post to circle b",
+                Date = new DateTime(2020, 5, 5),
+                ContentType = "text",
+                IsPublic = false,
+                Comments = new List<string>(),
+                CircleRef = new List<string>
+                {
+                    "CircleB"
+                }
             };
 
             List<Post> posts = new List<Post>
             {
-                post1, post2, post3, post4
+                post1, post2, post3, post4, post5
             };
 
             _post.InsertMany(posts);
@@ -244,7 +282,7 @@ namespace SocialNetwork.Data
                 Name = "Rene",
                 Gender = "M",
                 Age = 30,
-                Circles = new List<string>
+                CreatedCircles = new List<string>
                 {
                     "CircleA"
                 },
@@ -262,7 +300,7 @@ namespace SocialNetwork.Data
                 Name = "Stine",
                 Gender = "F",
                 Age = 23,
-                Circles = new List<string>
+                CreatedCircles = new List<string>
                 {
                     "CircleB"
                 },
@@ -280,7 +318,7 @@ namespace SocialNetwork.Data
                 Name = "Dorte",
                 Gender = "F",
                 Age = 44,
-                Circles = new List<string>
+                CreatedCircles = new List<string>
                 {
                     "CircleC"
                 },
@@ -299,7 +337,7 @@ namespace SocialNetwork.Data
                 Name = "Jason",
                 Gender = "M",
                 Age = 17,
-                Circles = new List<string>(),
+                CreatedCircles = new List<string>(),
                 Posts = new List<string>(),
                 Blocked = "BlockedId4",
                 Follows = "FollowsId4"
@@ -311,7 +349,7 @@ namespace SocialNetwork.Data
                 Name = "Jens",
                 Gender = "M",
                 Age = 45,
-                Circles = new List<string>(),
+                CreatedCircles = new List<string>(),
                 Posts = new List<string>(),
                 Blocked = "BlockedId5",
                 Follows = "FollowsId5"
@@ -325,30 +363,14 @@ namespace SocialNetwork.Data
             _user.InsertMany(users);
         }
 
-        public void SeedWall()
-        {
-            Wall wall1 = new Wall
-            {
-                UserId = "User1",
-                Posts = new List<string>
-                {
-                    "PostId1"
-                }
-            };
-
-            _wall.InsertOne(wall1);
-        }
-
         public void SeedAll()
         {
             SeedBlocked();
             SeedCircle();
             SeedComment();
-            SeedFeed();
             SeedFollows();
             SeedPost();
             SeedUser();
-            SeedWall();
         }
     }
 }

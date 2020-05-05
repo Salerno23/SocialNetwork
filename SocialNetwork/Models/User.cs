@@ -22,7 +22,7 @@ namespace SocialNetwork.Models
 
         public int Age { get; set; }
 
-        public List<string> Circles { get; set; }
+        public List<string> CreatedCircles { get; set; }
 
         public List<string> Posts { get; set; }
 

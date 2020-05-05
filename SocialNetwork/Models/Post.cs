@@ -21,7 +21,7 @@ namespace SocialNetwork.Models
         public string ContentType { get; set; }
         public bool IsPublic { get; set; }
 
-        public List<string> CommentRef { get; set; }
+        public List<string> Comments { get; set; }
         public List<string> CircleRef { get; set; }
     }
 }

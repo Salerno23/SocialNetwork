@@ -29,6 +29,26 @@ namespace SocialNetwork.Services
         public Circle GetForCircleId(string circleId) =>
             _circle.Find<Circle>(circle => circle.CircleId == circleId).FirstOrDefault();
 
+        public List<Circle> GetCirclesForUser(string userId)
+        {
+            return _circle.Find<Circle>(circle => circle.MemberIds.Contains(userId)).ToList();
+        }
+
+        public bool IsUserInCircle(string circleId, string userId)
+        {
+            var circle = _circle
+                .Find<Circle>(c => c.CircleId == circleId && 
+                                   c.MemberIds.Contains(userId))
+                .FirstOrDefault();
+
+            if (circle == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public Circle Create(Circle circle)
         {
             _circle.InsertOne(circle);

@@ -43,8 +43,6 @@ namespace SocialNetwork
             services.AddSingleton<PostService>();
             services.AddSingleton<CommentService>();
             services.AddSingleton<FollowsService>();
-            services.AddSingleton<FeedService>();
-            services.AddSingleton<WallService>();
 
             services.AddTransient<DataSeeder>();
 

@@ -30,6 +30,11 @@ namespace SocialNetwork.Services
         public Post GetForPostId(string postId) =>
             _post.Find<Post>(post => post.PostId == postId).FirstOrDefault();
 
+        public List<Post> GetPostsForCircle(string circleId)
+        {
+            return _post.Find<Post>(post => post.CircleRef.Contains(circleId)).ToList();
+        }
+
         public Post Create(Post post)
         {
             _post.InsertOne(post);

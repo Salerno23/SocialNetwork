@@ -25,7 +25,7 @@ namespace SocialNetwork.Controllers
         {
             var post = _postService.GetForPostId(postId);
 
-            post.CommentRef.Add(comment.CommentId);
+            post.Comments.Add(comment.CommentId);
 
             _postService.Update(post.Id, post);
 
