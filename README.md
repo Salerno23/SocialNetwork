@@ -78,7 +78,7 @@ fx:
 
 JSON indhold:
 <post indhold>: Består af enten tekst for en post eller imaginær URL/string for beliggenhed af det uploadede image
-"contentType": "text" hvis en tekst post, "image" hvis en image post
+"contentType": "text" hvis det er en tekst post, "image" hvis det er en image post
 "isPublic": er false hvis post er til en circle
 "circleRef": CircleId'er hvorpå denne post er postet til.
 
