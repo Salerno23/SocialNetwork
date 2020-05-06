@@ -1,3 +1,8 @@
+
+Ændr ConnectionString i appsettings.json for eget MongoDb ConnectionString, hvis nødvendigt.
+
+------------------------------------------------------------------------------------------
+
 Første kørsel af SocialNetwork solution:
 1. Byg solution
 2. Kør projekt med Ctrl + F5
@@ -81,6 +86,9 @@ JSON indhold:
 "contentType": "text" hvis det er en tekst post, "image" hvis det er en image post
 "isPublic": er false hvis post er til en circle
 "circleRef": CircleId'er hvorpå denne post er postet til.
+
+
+
 
 Lav en comment for PostId:
 1. Kør projekt med Ctrl + F5
